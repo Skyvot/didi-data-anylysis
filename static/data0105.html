@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
+    <title>热力图功能示例</title>
+    <style type="text/css">
+        ul,li{list-style: none;margin:0;padding:0;float:left;}
+        html{height:100%}
+        body{height:100%;margin:0px;padding:0px;font-family:"微软雅黑";}
+        #container{height:95%;width:100%;}
+        #r-result{width:100%;}
+    </style>
+</head>
+<body onload="openHeatmap()">
+    <div id="container"></div>
+    <div id="r-result">
+        <a href="data0100.html">00:00-01:00</a>
+        <a href="data0101.html">01:00-02:00</a>
+        <a href="data0102.html">02:00-03:00</a>
+        <a href="data0103.html">03:00-04:00</a>
+        <a href="data0104.html">04:00-05:00</a>
+        <a href="data0105.html">05:00-06:00</a>
+        <a href="data0106.html">06:00-07:00</a>
+        <a href="data0107.html">07:00-08:00</a>
+        <a href="data0108.html">08:00-09:00</a>
+        <a href="data0109.html">09:00-10:00</a>
+        <a href="data0110.html">10:00-11:00</a>
+        <a href="data0111.html">11:00-12:00</a>
+        <a href="data0112.html">12:00-13:00</a>
+        <a href="data0113.html">13:00-14:00</a>
+        <a href="data0114.html">14:00-15:00</a>
+        <a href="data0115.html">15:00-16:00</a>
+        <a href="data0116.html">16:00-17:00</a>
+        <a href="data0117.html">17:00-18:00</a>
+        <a href="data0118.html">18:00-19:00</a>
+        <a href="data0119.html">19:00-20:00</a>
+        <a href="data0120.html">20:00-21:00</a>
+        <a href="data0121.html">21:00-22:00</a>
+        <a href="data0122.html">22:00-23:00</a>
+        <a href="data0123.html">23:00-24:00</a>
+        <input type="button"  onclick="openHeatmap();" value="显示热力图"/><input type="button"  onclick="closeHeatmap();" value="关闭热力图"/>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var map = new BMap.Map("container");          // 创建地图实例
+
+    var point = new BMap.Point(108.97, 34.25);
+    map.centerAndZoom(point,15);             // 初始化地图，设置中心点坐标和地图级别
+    map.enableScrollWheelZoom(); // 允许滚轮缩放
+    var points = [{"lat":34.22016,"lng":108.97011,"count":1},
+{"lat":34.26984,"lng":108.9481,"count":1},
+{"lat":34.24832,"lng":108.95028,"count":1},
+{"lat":34.22287,"lng":108.93612,"count":1},
+{"lat":34.26358,"lng":108.94964,"count":1},
+{"lat":34.2633,"lng":108.97687,"count":1},
+{"lat":34.21387,"lng":108.94675,"count":1},
+{"lat":34.24437,"lng":108.96588,"count":1},
+{"lat":34.25836,"lng":108.98365,"count":1},
+{"lat":34.25593,"lng":108.9472,"count":1},
+{"lat":34.22531,"lng":108.93181,"count":1},
+{"lat":34.24657,"lng":108.92348,"count":1},
+{"lat":34.22585,"lng":108.9821,"count":1},
+{"lat":34.21797,"lng":108.93176,"count":1},
+{"lat":34.23811,"lng":108.93225,"count":1},
+{"lat":34.21312,"lng":108.9466,"count":1},
+{"lat":34.26391,"lng":108.98506,"count":1},
+{"lat":34.25964,"lng":108.95733,"count":1},
+{"lat":34.25963,"lng":108.95843,"count":1},
+{"lat":34.23104,"lng":108.96705,"count":1},
+{"lat":34.21851,"lng":108.95661,"count":1},
+{"lat":34.22658,"lng":108.96188,"count":1},
+{"lat":34.24132,"lng":108.98151,"count":1},
+{"lat":34.25953,"lng":108.94825,"count":1},
+{"lat":34.2367,"lng":108.92104,"count":1},
+{"lat":34.26521,"lng":108.95958,"count":1},
+{"lat":34.25634,"lng":108.94093,"count":1},
+{"lat":34.26586,"lng":108.9614,"count":1},
+{"lat":34.25939,"lng":108.98297,"count":1},
+{"lat":34.26949,"lng":108.9629,"count":1},
+{"lat":34.2595,"lng":108.94077,"count":1},
+{"lat":34.23548,"lng":108.97783,"count":1},
+{"lat":34.2436,"lng":108.97129,"count":1},
+{"lat":34.26481,"lng":108.96058,"count":1},
+{"lat":34.26088,"lng":108.9257,"count":1},
+{"lat":34.26434,"lng":108.96413,"count":1},
+{"lat":34.23168,"lng":108.93218,"count":1},
+{"lat":34.22517,"lng":108.94669,"count":1},
+{"lat":34.23038,"lng":108.93171,"count":1},
+{"lat":34.22894,"lng":108.98942,"count":1},
+{"lat":34.2244,"lng":108.98309,"count":1},
+{"lat":34.25563,"lng":108.93943,"count":1},
+{"lat":34.25082,"lng":108.95563,"count":1},
+{"lat":34.23138,"lng":108.9469,"count":1},
+{"lat":34.24061,"lng":108.93223,"count":1},
+{"lat":34.26514,"lng":108.97495,"count":1},
+{"lat":34.26457,"lng":108.94749,"count":1},
+{"lat":34.26018,"lng":108.94715,"count":1},
+{"lat":34.25518,"lng":108.94228,"count":1},
+{"lat":34.21789,"lng":108.93165,"count":1},
+{"lat":34.26091,"lng":108.92654,"count":1},
+{"lat":34.25517,"lng":108.93234,"count":1},
+{"lat":34.21306,"lng":108.94659,"count":1},
+{"lat":34.21643,"lng":108.93896,"count":1},
+{"lat":34.22921,"lng":108.92704,"count":1},
+{"lat":34.25545,"lng":108.94283,"count":1},
+{"lat":34.26472,"lng":108.96296,"count":1},
+{"lat":34.25867,"lng":108.95708,"count":1},
+{"lat":34.24492,"lng":108.98816,"count":1},
+{"lat":34.25078,"lng":108.93935,"count":1},
+{"lat":34.2672,"lng":108.967,"count":1},
+{"lat":34.26433,"lng":108.96517,"count":1},
+{"lat":34.24832,"lng":108.95226,"count":1},
+{"lat":34.23528,"lng":108.94937,"count":1},
+{"lat":34.24816,"lng":108.92345,"count":1},
+{"lat":34.25617,"lng":108.95739,"count":1},
+{"lat":34.23689,"lng":108.94701,"count":1},
+{"lat":34.22659,"lng":108.97067,"count":1},
+{"lat":34.21187,"lng":108.92372,"count":1},
+{"lat":34.24539,"lng":108.94699,"count":1},
+{"lat":34.21205,"lng":108.94674,"count":1},
+{"lat":34.26961,"lng":108.98135,"count":1},
+{"lat":34.21185,"lng":108.92535,"count":1},
+{"lat":34.23736,"lng":108.95707,"count":1},
+{"lat":34.23691,"lng":108.94755,"count":1},
+{"lat":34.2618,"lng":108.92119,"count":1},
+{"lat":34.25645,"lng":108.94096,"count":1},
+{"lat":34.2117,"lng":108.95597,"count":1},
+{"lat":34.26961,"lng":108.98168,"count":1},
+{"lat":34.24127,"lng":108.93446,"count":1},
+{"lat":34.21638,"lng":108.93896,"count":1},
+{"lat":34.25948,"lng":108.92655,"count":1},
+{"lat":34.2576,"lng":108.96322,"count":1},
+{"lat":34.23654,"lng":108.92338,"count":1},
+{"lat":34.23251,"lng":108.94666,"count":1},
+{"lat":34.23476,"lng":108.97629,"count":1},
+{"lat":34.22275,"lng":108.93743,"count":1},
+{"lat":34.26287,"lng":108.94693,"count":1},
+{"lat":34.22571,"lng":108.93181,"count":1},
+{"lat":34.26992,"lng":108.95981,"count":1},
+{"lat":34.22394,"lng":108.94711,"count":1},
+{"lat":34.23841,"lng":108.9322,"count":1},
+{"lat":34.22663,"lng":108.96756,"count":1},
+{"lat":34.21669,"lng":108.98893,"count":1},
+{"lat":34.24315,"lng":108.97927,"count":1},
+{"lat":34.23307,"lng":108.95046,"count":1},
+{"lat":34.23504,"lng":108.94282,"count":1},
+{"lat":34.25935,"lng":108.93757,"count":1},
+{"lat":34.24796,"lng":108.93599,"count":1},
+{"lat":34.22279,"lng":108.96222,"count":1},
+{"lat":34.24131,"lng":108.94359,"count":1},
+{"lat":34.26434,"lng":108.96427,"count":1},
+{"lat":34.22973,"lng":108.94013,"count":1},
+{"lat":34.21188,"lng":108.92159,"count":1},
+{"lat":34.25904,"lng":108.92319,"count":1},
+{"lat":34.2483,"lng":108.94944,"count":1},
+{"lat":34.26076,"lng":108.9541,"count":1},
+{"lat":34.23561,"lng":108.96256,"count":1},
+{"lat":34.25747,"lng":108.96323,"count":1},
+{"lat":34.22288,"lng":108.94019,"count":1},
+{"lat":34.22538,"lng":108.93203,"count":1},
+{"lat":34.25083,"lng":108.94155,"count":1},
+{"lat":34.23212,"lng":108.96382,"count":1},
+{"lat":34.23894,"lng":108.97227,"count":1},
+{"lat":34.26948,"lng":108.98577,"count":1},
+{"lat":34.23721,"lng":108.94692,"count":1},
+{"lat":34.26976,"lng":108.92963,"count":1},
+{"lat":34.25965,"lng":108.95607,"count":1},
+{"lat":34.2112,"lng":108.94658,"count":1},
+{"lat":34.21867,"lng":108.93912,"count":1},
+{"lat":34.26093,"lng":108.92922,"count":1},
+{"lat":34.2266,"lng":108.97015,"count":1},
+{"lat":34.24827,"lng":108.94799,"count":1},
+{"lat":34.25081,"lng":108.95495,"count":1},
+{"lat":34.24122,"lng":108.98104,"count":1},
+{"lat":34.23604,"lng":108.94922,"count":1},
+{"lat":34.22287,"lng":108.92879,"count":1},
+{"lat":34.24777,"lng":108.93897,"count":1},
+{"lat":34.23545,"lng":108.92759,"count":1},
+{"lat":34.24558,"lng":108.96022,"count":1},
+{"lat":34.2593,"lng":108.94837,"count":1},
+{"lat":34.26995,"lng":108.96378,"count":1},
+{"lat":34.26434,"lng":108.96412,"count":1},
+{"lat":34.23417,"lng":108.94982,"count":1},
+{"lat":34.25953,"lng":108.93208,"count":1},
+{"lat":34.23557,"lng":108.92643,"count":1},
+{"lat":34.25925,"lng":108.9739,"count":1},
+{"lat":34.24711,"lng":108.954,"count":1},
+{"lat":34.2479,"lng":108.94685,"count":1},
+{"lat":34.23503,"lng":108.94668,"count":1},
+{"lat":34.23052,"lng":108.98262,"count":1},
+{"lat":34.2369,"lng":108.98123,"count":1},
+{"lat":34.26979,"lng":108.96297,"count":1},
+{"lat":34.22287,"lng":108.92683,"count":1},
+{"lat":34.23771,"lng":108.96372,"count":1},
+{"lat":34.22947,"lng":108.93578,"count":1},
+{"lat":34.2327,"lng":108.9469,"count":1},
+{"lat":34.26187,"lng":108.97815,"count":1},
+{"lat":34.23239,"lng":108.97064,"count":1},
+{"lat":34.24084,"lng":108.9468,"count":1},
+{"lat":34.24602,"lng":108.972,"count":1},
+{"lat":34.26921,"lng":108.92198,"count":1},
+{"lat":34.24269,"lng":108.96344,"count":1},
+{"lat":34.24126,"lng":108.95928,"count":1},
+{"lat":34.25239,"lng":108.94095,"count":1},
+{"lat":34.24828,"lng":108.95386,"count":1},
+{"lat":34.22276,"lng":108.94034,"count":1},
+{"lat":34.23666,"lng":108.94646,"count":1},
+{"lat":34.2391,"lng":108.95706,"count":1},
+{"lat":34.22595,"lng":108.98286,"count":1},
+{"lat":34.22659,"lng":108.97064,"count":1},
+{"lat":34.25479,"lng":108.96696,"count":1},
+{"lat":34.26887,"lng":108.94725,"count":1},
+{"lat":34.24354,"lng":108.95615,"count":1},
+{"lat":34.2508,"lng":108.93702,"count":1},
+{"lat":34.25915,"lng":108.97599,"count":1},
+{"lat":34.25578,"lng":108.92888,"count":1},
+{"lat":34.25354,"lng":108.97224,"count":1},
+{"lat":34.25105,"lng":108.93808,"count":1},
+{"lat":34.25615,"lng":108.95713,"count":1},
+{"lat":34.22279,"lng":108.94207,"count":1},
+{"lat":34.2323,"lng":108.94689,"count":1},
+{"lat":34.2594,"lng":108.98302,"count":1},
+{"lat":34.26181,"lng":108.95412,"count":1},
+{"lat":34.23155,"lng":108.96859,"count":1},
+{"lat":34.22289,"lng":108.94005,"count":1},
+{"lat":34.24555,"lng":108.94676,"count":1},
+{"lat":34.25578,"lng":108.9341,"count":1},
+{"lat":34.25703,"lng":108.96085,"count":1},
+{"lat":34.26752,"lng":108.96289,"count":1},
+{"lat":34.22558,"lng":108.93188,"count":1},
+{"lat":34.24821,"lng":108.93898,"count":1},
+{"lat":34.26426,"lng":108.96723,"count":1},
+{"lat":34.2445,"lng":108.9503,"count":1},
+{"lat":34.23934,"lng":108.93221,"count":1},
+{"lat":34.26188,"lng":108.97105,"count":1},
+{"lat":34.24929,"lng":108.94987,"count":1},
+{"lat":34.25528,"lng":108.94229,"count":1},
+{"lat":34.2617,"lng":108.94694,"count":1},
+{"lat":34.22983,"lng":108.93027,"count":1},
+{"lat":34.26962,"lng":108.92798,"count":1},
+{"lat":34.2508,"lng":108.93573,"count":1},
+{"lat":34.25971,"lng":108.93904,"count":1},
+{"lat":34.2628,"lng":108.92244,"count":1},
+{"lat":34.24357,"lng":108.95369,"count":1},
+{"lat":34.22091,"lng":108.93179,"count":1},
+{"lat":34.24604,"lng":108.96781,"count":1},
+{"lat":34.24559,"lng":108.97225,"count":1},
+{"lat":34.25081,"lng":108.95479,"count":1},
+{"lat":34.24136,"lng":108.95911,"count":1},
+{"lat":34.25635,"lng":108.95706,"count":1},
+{"lat":34.22287,"lng":108.95153,"count":1},
+{"lat":34.26741,"lng":108.92231,"count":1},
+{"lat":34.23614,"lng":108.9235,"count":1},
+{"lat":34.25762,"lng":108.93277,"count":1},
+{"lat":34.26487,"lng":108.94705,"count":1},
+{"lat":34.25083,"lng":108.95631,"count":1},
+{"lat":34.22891,"lng":108.9897,"count":1},
+{"lat":34.23176,"lng":108.92527,"count":1},
+{"lat":34.26734,"lng":108.9221,"count":1},
+{"lat":34.26988,"lng":108.95453,"count":1},
+{"lat":34.26961,"lng":108.98207,"count":1},
+{"lat":34.22275,"lng":108.9517,"count":1},
+{"lat":34.22888,"lng":108.97497,"count":1},
+{"lat":34.24598,"lng":108.94779,"count":1},
+{"lat":34.25963,"lng":108.95871,"count":1},
+{"lat":34.22153,"lng":108.94667,"count":1},
+{"lat":34.267,"lng":108.97753,"count":1},
+{"lat":34.25979,"lng":108.98915,"count":1},
+{"lat":34.22547,"lng":108.95352,"count":1},
+{"lat":34.26995,"lng":108.94754,"count":1},
+{"lat":34.23773,"lng":108.96372,"count":1},
+{"lat":34.22484,"lng":108.97972,"count":1},
+{"lat":34.25118,"lng":108.93906,"count":1},
+{"lat":34.24218,"lng":108.96024,"count":1},
+{"lat":34.22734,"lng":108.93129,"count":1},
+{"lat":34.22759,"lng":108.92137,"count":1},
+{"lat":34.26459,"lng":108.96058,"count":1},
+{"lat":34.23023,"lng":108.92798,"count":1},
+{"lat":34.26961,"lng":108.98191,"count":1},
+{"lat":34.24052,"lng":108.94866,"count":1},
+{"lat":34.25451,"lng":108.93253,"count":1},
+{"lat":34.25674,"lng":108.96093,"count":1},
+{"lat":34.25233,"lng":108.94771,"count":1},
+{"lat":34.26997,"lng":108.96959,"count":1},
+{"lat":34.23558,"lng":108.96772,"count":1},
+{"lat":34.2575,"lng":108.96696,"count":1},
+{"lat":34.26961,"lng":108.93285,"count":1},
+{"lat":34.26457,"lng":108.97505,"count":1},
+{"lat":34.26669,"lng":108.96923,"count":1},
+{"lat":34.24024,"lng":108.93221,"count":1},
+{"lat":34.24955,"lng":108.97244,"count":1},
+{"lat":34.25715,"lng":108.96696,"count":1},
+{"lat":34.22763,"lng":108.94672,"count":1},
+{"lat":34.23543,"lng":108.97967,"count":1},
+{"lat":34.25079,"lng":108.92034,"count":1},
+{"lat":34.25742,"lng":108.94346,"count":1},
+{"lat":34.22571,"lng":108.97527,"count":1},
+{"lat":34.26962,"lng":108.98575,"count":1},
+{"lat":34.24133,"lng":108.98353,"count":1},
+{"lat":34.26645,"lng":108.95664,"count":1},
+{"lat":34.23713,"lng":108.94692,"count":1},
+{"lat":34.24604,"lng":108.9772,"count":1},
+{"lat":34.23691,"lng":108.94772,"count":1},
+{"lat":34.25546,"lng":108.94569,"count":1},
+{"lat":34.26375,"lng":108.93823,"count":1},
+{"lat":34.23692,"lng":108.948,"count":1},
+{"lat":34.2593,"lng":108.97792,"count":1},
+{"lat":34.22338,"lng":108.96929,"count":1},
+{"lat":34.2508,"lng":108.93611,"count":1},
+{"lat":34.26961,"lng":108.98312,"count":1},
+{"lat":34.25726,"lng":108.98835,"count":1},
+{"lat":34.23547,"lng":108.92645,"count":1},
+{"lat":34.24191,"lng":108.98835,"count":1},
+{"lat":34.24595,"lng":108.9303,"count":1},
+{"lat":34.23737,"lng":108.95707,"count":1},
+{"lat":34.26003,"lng":108.92328,"count":1},
+{"lat":34.23099,"lng":108.93208,"count":1},
+{"lat":34.24409,"lng":108.96272,"count":1},
+{"lat":34.24581,"lng":108.94491,"count":1},
+{"lat":34.21706,"lng":108.98059,"count":1},
+{"lat":34.22505,"lng":108.9421,"count":1},
+{"lat":34.22293,"lng":108.93624,"count":1},
+{"lat":34.25693,"lng":108.92338,"count":1},
+{"lat":34.22011,"lng":108.92114,"count":1},
+{"lat":34.25644,"lng":108.96927,"count":1},
+{"lat":34.2597,"lng":108.95825,"count":1},
+{"lat":34.2606,"lng":108.96319,"count":1},
+{"lat":34.25633,"lng":108.96328,"count":1},
+{"lat":34.25421,"lng":108.94684,"count":1},
+{"lat":34.25657,"lng":108.96697,"count":1},
+{"lat":34.22012,"lng":108.92208,"count":1},
+{"lat":34.23832,"lng":108.92589,"count":1},
+{"lat":34.24117,"lng":108.94696,"count":1},
+{"lat":34.23956,"lng":108.95706,"count":1},
+{"lat":34.24812,"lng":108.92345,"count":1},
+{"lat":34.25954,"lng":108.93898,"count":1},
+
+];
+
+
+    if(!isSupportCanvas()){
+        alert('热力图目前只支持有canvas支持的浏览器,您所使用的浏览器不能使用热力图功能~')
+    }
+    //详细的参数,可以查看heatmap.js的文档 https://github.com/pa7/heatmap.js/blob/master/README.md
+    //参数说明如下:
+    /* visible 热力图是否显示,默认为true
+     * opacity 热力的透明度,1-100
+     * radius 势力图的每个点的半径大小
+     * gradient  {JSON} 热力图的渐变区间 . gradient如下所示
+     *  {
+            .2:'rgb(0, 255, 255)',
+            .5:'rgb(0, 110, 255)',
+            .8:'rgb(100, 0, 255)'
+        }
+        其中 key 表示插值的位置, 0~1.
+            value 为颜色值.
+     */
+    heatmapOverlay = new BMapLib.HeatmapOverlay({"radius":25});
+    map.addOverlay(heatmapOverlay);
+    heatmapOverlay.setDataSet({data:points,max:20});
+    //是否显示热力图
+    function openHeatmap(){
+        heatmapOverlay.show();
+    }
+    function closeHeatmap(){
+        heatmapOverlay.hide();
+    }
+    closeHeatmap();
+    function setGradient(){
+        /*格式如下所示:
+        {
+            0:'rgb(102, 255, 0)',
+            .5:'rgb(255, 170, 0)',
+            1:'rgb(255, 0, 0)'
+        }*/
+        var gradient = {};
+        var colors = document.querySelectorAll("input[type='color']");
+        colors = [].slice.call(colors,0);
+        colors.forEach(function(ele){
+            gradient[ele.getAttribute("data-key")] = ele.value;
+        });
+        heatmapOverlay.setOptions({"gradient":gradient});
+    }
+    //判断浏览区是否支持canvas
+    function isSupportCanvas(){
+        var elem = document.createElement('canvas');
+        return !!(elem.getContext && elem.getContext('2d'));
+    }
+</script>
